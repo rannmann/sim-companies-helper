@@ -14,10 +14,9 @@
     // API Module
     async function fetchData(endpoint) {
         const baseUrl = 'https://www.simcompanies.com/api/';
-        const realmId = 0; // or 1, depending on the user's realm
 
         try {
-            const response = await fetch(`${baseUrl}${endpoint}?realm=${realmId}`);
+            const response = await fetch(`${baseUrl}${endpoint}`);
             const data = await response.json();
             return data;
         } catch (error) {
@@ -66,7 +65,7 @@
         return data.producedAnHour;
     }
     
-    // Show rates of what we have queued
+    // Show rates of what we have queued.  WIP.
     async function processDailyProductionData(buildings) {
         const production = {};
     
@@ -203,6 +202,29 @@
         }
     }
 
+    // Function to handle URL changes
+    function handleUrlChange() {
+        const container = document.getElementById('sim-companies-helper');
+        if (window.location.pathname === '/landscape/') {
+            if (!container) {
+                init();
+            }
+        } else {
+            if (container) {
+                container.remove();
+            }
+        }
+    }
+
     // Run the init function when the page loads
-    window.addEventListener('load', init);
+    window.addEventListener('load', handleUrlChange);
+
+    // Monitor URL changes
+    window.addEventListener('popstate', handleUrlChange);
+    window.addEventListener('pushState', handleUrlChange);
+    window.addEventListener('replaceState', handleUrlChange);
+
+    // MutationObserver to detect URL changes in SPAs
+    const observer = new MutationObserver(handleUrlChange);
+    observer.observe(document, { subtree: true, childList: true });
 })();

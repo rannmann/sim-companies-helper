@@ -1,0 +1,1 @@
+# sim-companies-helper

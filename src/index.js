@@ -15,12 +15,7 @@ function debounce(func, wait) {
 
 // Initialize the script
 async function init() {
-    const buildings = await fetchData('v2/companies/me/buildings');
-    if (buildings) {
-        const productionData = processPendingProductionData(buildings);
-        // const productionData = await processDailyProductionData(buildings); // Uncomment if needed
-        createUI(productionData);
-    }
+    createUI();
 }
 
 // Function to handle URL changes

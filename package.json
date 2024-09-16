@@ -1,6 +1,6 @@
 {
   "name": "sim-companies-helper",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "This userscript provides additional insights for the browser game Sim Companies.",
   "main": "index.js",
   "scripts": {
